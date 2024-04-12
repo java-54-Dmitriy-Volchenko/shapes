@@ -140,4 +140,32 @@ class ShapeTests {
 		assertEquals(80, canvas2.perimeter());
 		
 	}
+	@Test
+	void removingTests() { //checking, if algorithm removes all elements with same id
+		Shape[] shapes = {};
+		Canvas canvas = new Canvas(1, shapes);
+		
+		Shape shapeRectangle1 = new Rectangle(115,5,6);	
+		Shape shapeRectangle2 = new Rectangle(116,6,7);	
+		Shape shapeSquare1 = new Rectangle(117,5);	
+		Shape shapeSquare2 = new Rectangle(101,3);
+		
+		canvas.addShape(shapeRectangle1);	
+		canvas.addShape(shapeRectangle2);	
+		canvas.addShape(shapeSquare1);
+		canvas.addShape(shapeSquare2);
+		canvas.addShape(shapeSquare2);
+		
+		
+		Shape[] expected = {shapeRectangle1, shapeRectangle2, shapeSquare1, shapeSquare2, shapeSquare2};
+		Shape[] actual = canvas.getShapes();
+		
+		assertArrayEquals(expected,actual);
+		
+		canvas.removeShape(101);
+		Shape[] expected1 = {shapeRectangle1, shapeRectangle2, shapeSquare1};
+		Shape[] actual1 = canvas.getShapes();
+		assertArrayEquals(expected1,actual1);
+	}
+	
 }
